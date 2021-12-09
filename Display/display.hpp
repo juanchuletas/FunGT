@@ -2,10 +2,16 @@
 #define _DISPLAY_GL_H_
 #include<string>
 #include<iostream>
+#ifndef __APPLE__
+glewInit();
+#endif
 #ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
+#define GLFW_INCLUDE_GLCOREARB
+#include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
+//#include <OpenGL/glu.h>
+//#include <GLUT/glut.h>
+#include <GLFW/glfw3.h>
 #else
 #ifdef _WIN32
   #include <windows.h>
