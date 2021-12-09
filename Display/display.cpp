@@ -45,7 +45,7 @@ int Display::build(){
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
         // Clean the back buffer and assign the new color to it
     
-    if(glewInit()!=GLEW_OK)
+    if(glfwInit()!=GLFW_TRUE)
     {
             std::cout<<"ERROR"<<std::endl;
     }
@@ -54,7 +54,7 @@ int Display::build(){
     {
         //Render
          glClear(GL_COLOR_BUFFER_BIT);
-            
+        
         //glUseProgram(shaderProgram);
         //glBindVertexArray(VAO);
         //glDrawArrays(GL_TRIANGLES,0,3);
