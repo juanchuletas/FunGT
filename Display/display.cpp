@@ -54,7 +54,7 @@ int Display::build(){
     {
         //Render
          glClear(GL_COLOR_BUFFER_BIT);
-            
+        
         //glUseProgram(shaderProgram);
         //glBindVertexArray(VAO);
         //glDrawArrays(GL_TRIANGLES,0,3);
