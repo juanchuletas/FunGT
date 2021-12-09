@@ -22,18 +22,26 @@ int Display::build(){
         return -1;
         // Tell GLFW what version of OpenGL we are using 
         // In this case we are using OpenGL 3.3
-    
+    #ifdef __APPLE__
+    /* We need to explicitly ask for a 3.2 context on OS X */
+    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    #else
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,4);
     glfwWindowHint(GLFW_RESIZABLE,GL_FALSE);
-
-        // Tell GLFW we are using the CORE profile
+       // Tell GLFW we are using the CORE profile
         // So that means we only have the modern functions
     glfwWindowHint(GLFW_OPENGL_PROFILE,GLFW_OPENGL_CORE_PROFILE);
+    #endif
+     
     window = glfwCreateWindow(width,height,Windowname.c_str(), NULL, NULL);
     if (!window)
     {
-         glfwTerminate();
+        glfwTerminate();
+        printf("FUCK\n");
         return -1;
     }
         // Introduce the window into the current context
