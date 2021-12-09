@@ -3,7 +3,7 @@
 #include<string>
 #include<iostream>
 #ifndef __APPLE__
-glewInit();
+int glewInit();
 #endif
 #ifdef __APPLE__
 #define GLFW_INCLUDE_GLCOREARB
