@@ -86,7 +86,7 @@ int Display::set(){
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
-    if(glewInit()!=GLEW_OK)
+    if(glfwInit()!=GL_TRUE)
     {
         std::cout<<"ERROR"<<std::endl;
     }
@@ -101,7 +101,13 @@ int Display::set(){
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
     //Shader init
-        Shader core_program{"vertex_core.glsl","fragment_core.glsl"};
+
+        #ifdef __APPLE__
+        #define GLFW_INCLUDE_GLCOREARB
+            Shader core_program{"../resources/vertex_core_OSX.glsl","../resources/fragment_core_OSX.glsl"};
+        #else
+            Shader core_program{"../resources/vertex_core.glsl","../resources/fragment_core.glsl"};
+        #endif
    
         //VAO, VBO, EBO 
         VAO vertexArrayObject{};
@@ -117,6 +123,7 @@ int Display::set(){
         VI vertexIndices{indices,sizeof(indices)};
 
         std::cout<<"Num of indices: "<<sizeof(indices)<<std::endl;
+        printf("Supported GLSL version is %s.\n", (char *)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
         //SET VERTEXATTRIBPOINTERS AND ENABLE (INPUT ASSEMBLY)
         //POSITION 
