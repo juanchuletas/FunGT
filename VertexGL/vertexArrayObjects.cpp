@@ -2,7 +2,7 @@
 
 
 VAO::VAO(){
-    glCreateVertexArrays(1,&id_vao);
+    glGenVertexArrays(1,&id_vao);
     glBindVertexArray(id_vao);
 }
 VAO::~VAO(){

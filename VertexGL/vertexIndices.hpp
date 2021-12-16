@@ -1,7 +1,12 @@
 #if !defined(_VERTEX_INDICES_H_)
 #define _VERTEX_INDICES_H_
+#ifdef __APPLE__
+#define GLFW_INCLUDE_GLCOREARB
+#include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
+#else
 #include <GL/glew.h>
-
+#endif
 class VI{
 
     unsigned int id_rnd;
