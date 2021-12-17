@@ -86,10 +86,17 @@ int Display::set(){
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 
-    if(glfwInit()!=GL_TRUE)
-    {
-        std::cout<<"ERROR"<<std::endl;
-    }
+    #ifdef __APPLE__
+        if(glfwInit()!=GL_TRUE)
+        {
+            std::cout<<"ERROR"<<std::endl;
+        }
+    #else
+        if(glewInit()!=GLEW_OK)
+        {
+            std::cout<<"ERROR"<<std::endl;
+        }
+    #endif
     //OPENGL OPTIONS
 
     glEnable(GL_DEPTH_TEST);
