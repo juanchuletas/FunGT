@@ -1,0 +1,11 @@
+Model Information:
+* title:	Dancing Alien
+* source:	https://sketchfab.com/3d-models/dancing-alien-552c535ee7734657b6e483aff4cff593
+* author:	nthmn.exe (https://sketchfab.com/nthmn.exe)
+
+Model License:
+* license type:	CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions must have the same license.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Dancing Alien" (https://sketchfab.com/3d-models/dancing-alien-552c535ee7734657b6e483aff4cff593) by nthmn.exe (https://sketchfab.com/nthmn.exe) licensed under CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
