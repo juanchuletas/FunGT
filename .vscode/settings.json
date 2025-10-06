@@ -64,7 +64,10 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "format": "cpp"
     },
     "cmake.sourceDirectory": "/home/juanchuletas/Documents/Development/FunGT/main",
     "editor.formatOnPaste": true
