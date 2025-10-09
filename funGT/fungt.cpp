@@ -11,11 +11,10 @@ FunGT::FunGT(int _width, int _height)
     m_firstMouse = true;
 
     m_sceneManager  = std::make_shared<SceneManager>();
-    m_infoWindow    = std::make_shared<InfoWindow>();
     m_ViewPortLayer = std::make_unique<ViewPort>();
     m_imguiLayer    = std::make_unique<ImGuiLayer>();
-
-    m_layerStack.PushLayer(std::move(m_ViewPortLayer)); //Owns now to the stack Layer;
+    //m_infoWindow    = std::make_shared<InfoWindow>();
+   
 
 }
 FunGT::~FunGT(){
@@ -56,12 +55,15 @@ void FunGT::processMouseInput(double xpos, double ypos)
 void FunGT::mouse_callback(GLFWwindow *window, double xpos, double ypos){
     //std::cout<<" fungT: mouse callback "<<std::endl; 
     FunGT * fungtInstance =  static_cast<FunGT*>(glfwGetWindowUserPointer(window));
-    if (fungtInstance != nullptr && glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
-        fungtInstance->processMouseInput(xpos,ypos); 
+    if (fungtInstance != nullptr) {
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS) {
+            fungtInstance->processMouseInput(xpos, ypos);
+        }
+       
         //std::cout<< "not nullptr "<<std::endl;
     }
     else{
-        std::cout<< "nullptr "<<std::endl;
+        std::cout << "fungtInstance : nullptr " << std::endl;
     }
 
 
@@ -87,10 +89,10 @@ std::shared_ptr<SceneManager> FunGT::getSceneManager()
     return m_sceneManager;
 }
 
-std::shared_ptr<GUI> FunGT::getInfoWindow()
-{
-    return m_infoWindow;
-}
+// std::shared_ptr<GUI> FunGT::getInfoWindow()
+// {
+//     return m_infoWindow;
+// }
 
 void FunGT::set(const std::function<void()>& renderLambda){
     std::cout << "Starting FunGT Setting process..." << std::endl;
@@ -99,7 +101,7 @@ void FunGT::set(const std::function<void()>& renderLambda){
 
 
     ProjectionMatrix = glm::perspective(glm::radians(fov),
-                                        static_cast<float>(m_frameBufferWidth)/m_frameBufferHeight,nearPlane, farPlane);
+        static_cast<float>(m_frameBufferWidth) / m_frameBufferHeight, nearPlane, farPlane);
 
    for(const auto& node : m_sceneManager->getRenderable()){
 
@@ -113,7 +115,8 @@ void FunGT::set(const std::function<void()>& renderLambda){
         m_imguiLayer->setNativeWindow(*m_Window, m_frameBufferWidth, m_frameBufferHeight);
         m_layerStack.PushLayer(std::move(m_imguiLayer));
     }
-
+    
+    m_layerStack.PushLayer(std::move(m_ViewPortLayer)); //Owns now to the stack Layer;
     std::cout << "Finished Setting process..." << std::endl;
 
 }
@@ -150,4 +153,27 @@ void FunGT::update(const std::function<void()> &renderLambda)
 void FunGT::guiUpdate(const std::function<void()> &guiRender)
 {
     guiRender();
+}
+void FunGT::guiUpdate()
+{
+    // --- Update all layers ---
+    for (auto& layer : m_layerStack) {
+        layer->onUpdate();
+    }
+
+    // --- Start ImGui frame ---
+    for (auto& layer : m_layerStack) {
+        layer->begin();
+    }
+
+    // --- Render ImGui content ---
+    for (auto& layer : m_layerStack) {
+        layer->onImGuiRender();
+    }
+
+    // --- End ImGui frame ---
+    for (auto& layer : m_layerStack) {
+        layer->end();
+    }
+
 }
