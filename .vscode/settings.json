@@ -64,7 +64,12 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "shared_mutex": "cpp",
+        "format": "cpp",
+        "future": "cpp"
     },
     "cmake.sourceDirectory": "/home/juanchuletas/Documents/Development/FunGT/main",
     "editor.formatOnPaste": true
